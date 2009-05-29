@@ -16,8 +16,6 @@ cmd "cd rubygems* && sudo ruby setup.rb --no-ri --no-rdoc"
 cmd "sudo ln -sfv /usr/bin/gem1.8 /usr/bin/gem"
 cmd "sudo gem install rdoc chef ohai --no-ri --no-rdoc --source http://gems.opscode.com --source http://gems.rubyforge.org"
 cmd "yes | sudo mkfs -t ext3 /dev/sdf"
-cmd "sudo mkdir -p /db"
-cmd "sudo mkdir -p /etc/chef && sudo chown root:admin /etc/chef && sudo chmod g+w /etc/chef"
 
 puts
 puts "It seems to have worked!"

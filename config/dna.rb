@@ -2,26 +2,23 @@ require 'rubygems'
 require 'json'
 
 dna = {
-  :assigned_hostname => 'fresqui01',
-  :assigned_domain => 'fresqui.com',
-  :ipaddress => '79.125.12.4',
-
-  :ebs_volumes => {
-    'ebs1' => {
-      :mount_point => '/db',
-      :type => 'ext3',
-      :device => '/dev/sdf'
-    }
-  },
+  :ebs_volumes => [
+    {:device => 'sdf', :path => '/db'}
+  ],
   :mysql => {
+    :datadir => '/var/lib/mysql',
     :ec2_path => '/db/mysql',
-    
-    :server_root_password => 'belen3'
-  }, 
+    :server_root_password => 'belen3',
+    :bind_address => '127.0.0.1',
+    :tunable => {
+      :key_buffer => '250M',
+      :net_read_timeout => '30'
+    },
+  },
 
   :recipes => [
-    'ec2',
-    'ec2::filesystems',
+    'ec2-ebs',
+    'apparmor',
     'mysql::server'
   ]
 }
