@@ -17,6 +17,14 @@ dna = {
     },
   },
 
+  :apache => {
+    :contact => 'jorgedf@fresqui.com'
+  },
+
+  :rails => {
+    :version => '2.3.2'
+  },
+
   :packages => [
     'imagemagick'
   ],
@@ -25,7 +33,9 @@ dna = {
     'ec2-ebs',
     'apparmor',
     'mysql::server',
-    'packages'
+    'packages',
+    'memcached',
+    'fresqui'
   ]
 }
 
