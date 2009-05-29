@@ -25,4 +25,3 @@ when "ubuntu"
     action :disable
   end
 end
-

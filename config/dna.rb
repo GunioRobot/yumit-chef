@@ -5,6 +5,7 @@ dna = {
   :ebs_volumes => [
     {:device => 'sdf', :path => '/db'}
   ],
+
   :mysql => {
     :datadir => '/var/lib/mysql',
     :ec2_path => '/db/mysql',
@@ -16,10 +17,15 @@ dna = {
     },
   },
 
+  :packages => [
+    'imagemagick'
+  ],
+
   :recipes => [
     'ec2-ebs',
     'apparmor',
-    'mysql::server'
+    'mysql::server',
+    'packages'
   ]
 }
 
