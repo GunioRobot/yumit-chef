@@ -18,8 +18,16 @@ dna = {
     },
   },
 
+  :sphinx => {
+    :prefix => '/usr/local'
+  },
+
   :apache => {
     :contact => 'jorgedf@fresqui.com'
+  },
+
+  :passenger => {
+    :version => '2.2.2'
   },
 
   :rails => {
@@ -54,6 +62,7 @@ dna = {
     'ec2-ebs',
     'apparmor',
     'mysql::server',
+    'sphinx',
     'packages',
     'users',
     'groups',

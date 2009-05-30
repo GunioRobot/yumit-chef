@@ -1,5 +1,11 @@
 REMOTE_CHEF_PATH = "/etc/chef" # Where to find upstream cookbooks
 
+desc "Bootstrap a new server to get ready to run chef"
+task :bootstrap do
+  sh "scp #{File.join(File.dirname(__FILE__), 'chef-bootstrap.rb')} #{ENV['server']}:/tmp/"
+  sh "ssh #{ENV['server']} \"ruby /tmp/chef-bootstrap.rb\""
+end
+
 desc "Test your cookbooks and config files for syntax errors"
 task :test do
   Dir[ File.join(File.dirname(__FILE__), "**", "*.rb") ].each do |recipe|
