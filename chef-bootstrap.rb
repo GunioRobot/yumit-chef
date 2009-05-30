@@ -15,7 +15,6 @@ cmd "curl -L 'http://rubyforge.org/frs/download.php/45905/rubygems-1.3.1.tgz' | 
 cmd "cd rubygems* && sudo ruby setup.rb --no-ri --no-rdoc"
 cmd "sudo ln -sfv /usr/bin/gem1.8 /usr/bin/gem"
 cmd "sudo gem install rdoc chef ohai --no-ri --no-rdoc --source http://gems.opscode.com --source http://gems.rubyforge.org"
-cmd "yes | sudo mkfs -t ext3 /dev/sdf"
 
 puts
 puts "It seems to have worked!"

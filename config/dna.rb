@@ -3,7 +3,8 @@ require 'json'
 
 dna = {
   :ebs_volumes => [
-    {:device => 'sdf', :path => '/db'}
+    {:device => 'sdf', :path => '/db'},
+    {:device => 'sdg', :path => '/www'}
   ],
 
   :mysql => {
@@ -26,7 +27,8 @@ dna = {
   },
 
   :packages => [
-    'imagemagick'
+    'imagemagick',
+    'htop'
   ],
 
   :recipes => [
