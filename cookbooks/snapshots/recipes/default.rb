@@ -1,3 +1,5 @@
+include_recipe 'logrotate'
+
 gem_package 'right_aws' do
   action :install
 end
@@ -20,7 +22,13 @@ if node[:snapshots]
       day     settings[:day]     if settings[:day]
       month   settings[:month]   if settings[:month]
       weekday settings[:weekday] if settings[:weekday]
-      command "/usr/local/bin/snapshot.rb /dev/#{device} >> /var/log/snapshots 2>&1"
+      command "/usr/local/bin/snapshot.rb /dev/#{device} >> /var/log/snapshots.log 2>&1"
     end
   end
+end
+
+logrotate "snapshots.log" do
+  files '/var/log/snapshots.log'
+  enable true
+  frequency 'weekly'
 end

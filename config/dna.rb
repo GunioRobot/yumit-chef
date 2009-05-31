@@ -59,7 +59,8 @@ dna = {
 
   :packages => [
     'imagemagick',
-    'htop'
+    'htop',
+    'git-core'
   ],
 
   :users => [{
