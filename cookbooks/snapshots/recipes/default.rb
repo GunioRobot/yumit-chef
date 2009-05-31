@@ -20,7 +20,7 @@ if node[:snapshots]
       day     settings[:day]     if settings[:day]
       month   settings[:month]   if settings[:month]
       weekday settings[:weekday] if settings[:weekday]
-      command "snapshot.rb /dev/#{device}"
+      command "/usr/local/bin/snapshot.rb /dev/#{device} >> /var/log/snapshots 2>&1"
     end
   end
 end

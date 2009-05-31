@@ -21,12 +21,12 @@ dna = {
 
   :snapshots => {
     'sdf' => {
-      'minute' => 17,
-      'hour' => 17
+      'minute' => 48,
+      'hour' => 15
     },
     'sdg' => {
-      'minute' => 17,
-      'hour' => 17
+      'minute' => 48,
+      'hour' => 15
     }
   },
 
