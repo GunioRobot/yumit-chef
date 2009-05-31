@@ -65,6 +65,13 @@ if (node[:ec2] && ! FileTest.directory?(node[:mysql][:ec2_path]))
     not_if do FileTest.directory?(node[:mysql][:ec2_path]) end
   end
 
+  unless FileTest.symlink?(node[:mysql][:datadir])
+    directory node[:mysql][:datadir] do
+      action :delete
+      recursive true
+    end
+  end
+
   link node[:mysql][:datadir] do
    to node[:mysql][:ec2_path]
   end

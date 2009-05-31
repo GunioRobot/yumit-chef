@@ -5,10 +5,9 @@ for ebs_volume in (node["ebs_volumes"] || [])
       sleep 5
     end
 
-    unless node['filesystem']["/dev/#{ebs_volume[:device]}"]
-      execute "format volume" do
-        command "yes | mkfs -t ext3 /dev/#{ebs_volume[:device]}"
-      end
+    execute "format volume" do
+      command "yes | mkfs -t ext3 /dev/#{ebs_volume[:device]}"
+      not_if "file -s /dev/#{ebs_volume[:device]} | grep ext3"
     end
 
     directory ebs_volume[:path] do

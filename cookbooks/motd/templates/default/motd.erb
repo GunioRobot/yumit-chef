@@ -1,4 +1,4 @@
-<%= @node[:platform] %> <%= @node[:platform_version] %> <%= @node[:os_version] %> <%= `hostname` %>
+<%= @node[:platform] %> <%= @node[:platform_version] %> <%= @node[:os_version] %> <%= @node['ec2']['instance_id'] %> <%= `hostname` %>
 <%= @node[:motd] %>
 The chef cooked this server at <%= Time.new.utc %>
 
