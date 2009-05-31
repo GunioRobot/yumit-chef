@@ -2,10 +2,33 @@ require 'rubygems'
 require 'json'
 
 dna = {
+  :host => {
+    :hostname => 'front',
+    :domain => 'fresqui.com',
+    :ipaddress => '79.125.12.4'
+  },
+
   :ebs_volumes => [
     {:device => 'sdf', :path => '/db'},
     {:device => 'sdg', :path => '/www'}
   ],
+
+  :ec2_settings => {
+    :public_key => 'AKIAJVM2GAYDRCVWVKEA',
+    :private_key => 'hFrwOAGjnZp7IYiFgw0Q7OsjcE4zwkspoVczTDnH',
+    :zone => 'eu-west-1'
+  },
+
+  :snapshots => {
+    'sdf' => {
+      'minute' => 17,
+      'hour' => 17
+    },
+    'sdg' => {
+      'minute' => 17,
+      'hour' => 17
+    }
+  },
 
   :mysql => {
     :datadir => '/var/lib/mysql',
@@ -58,14 +81,26 @@ dna = {
     :user => 'capistrano'
   },
 
+  :motd => "Welcome to the Fresqui EC2 web server instance.\n\n" +
+           "This instance is managed by chef. Access by ssh should never be used\n" +
+           "to install packages, change configuration files or manually compile\n"  +
+           "libraries. All of these tasks should be handled through changing the\n" +
+           "central chef recipe.\n",
+
   :recipes => [
-    'ec2-ebs',
+    'host',
+    'sources',
+    'tasksel',
     'apparmor',
+    'motd',
+    'ec2-ebs',
+    'snapshots',
+    'packages',
     'mysql::server',
     'sphinx',
-    'packages',
     'users',
     'groups',
+    'postfix',
     'fresqui'
   ]
 }

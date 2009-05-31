@@ -1,0 +1,24 @@
+#!/usr/bin/ruby
+# script to create a snapshot
+
+require 'rubygems'
+require 'right_aws'
+require 'net/http'
+
+AMAZON_PUBLIC_KEY  = '<%= @public_key %>'
+AMAZON_PRIVATE_KEY = '<%= @private_key %>'
+INSTANCE_ID        = '<%= @node['ec2']['instance_id'] %>'
+
+# remove last parameter if not in the EU zone
+ec2 = RightAws::Ec2.new(AMAZON_PUBLIC_KEY, AMAZON_PRIVATE_KEY,:endpoint_url => 'https://<%= @zone %>.ec2.amazonaws.com/')
+volumes = ec2.describe_volumes
+ec2_vol = volumes.find {|e| e[:aws_instance_id] == INSTANCE_ID && e[:aws_device] == ARGV.first }[:aws_id]
+
+raise "No volume found for device #{ARGV.first}" unless ec2_vol
+
+print "Create Snapshot ",ec2_vol," ",DateTime.now,"\n"
+
+print "snapshot ",ec2_vol,"\n"
+vol = ec2.create_snapshot(ec2_vol)
+print "result ",vol,"\n"
+print "Snapshot Complete ",ec2_vol," ",DateTime.now,"\n"
