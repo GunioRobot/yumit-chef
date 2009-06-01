@@ -1,0 +1,7 @@
+production:
+  adapter: mysql
+  encoding: utf8  
+  database: <%= @node[:fresqui][:db][:name] %>
+  username: <%= @node[:fresqui][:db][:user] %>
+  password: <%= @node[:fresqui][:db][:password] %>
+  host: <%= @node[:fresqui][:db][:host] %>

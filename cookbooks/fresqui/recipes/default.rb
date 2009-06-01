@@ -2,7 +2,7 @@ include_recipe "apache2"
 include_recipe "passenger"
 include_recipe "rails"
 include_recipe "runit"
-include_recipe "memcached"
+# include_recipe "memcached"
 
 gem_package 'daemons' do
   action :install
@@ -19,7 +19,7 @@ gem_package 'sqlite3-ruby' do
   version '1.2.4'
 end
 
-['', '/shared', '/releases'].each do |path|
+['', '/shared', '/releases', '/shared/system/config', '/shared/log'].each do |path|
   directory "#{node[:fresqui][:dir]}#{path}" do
     action :create
     recursive true
@@ -29,7 +29,23 @@ end
   end
 end
 
-memcached_instance "fresqui"
+template "#{node[:fresqui][:dir]}/shared/system/config/database.yml" do
+  owner node[:fresqui][:user]
+  source "database.yml.erb"
+end
+
+template "#{node[:fresqui][:dir]}/shared/system/config/mailer.yml" do
+  owner node[:fresqui][:user]
+  source "mailer.yml.erb"
+end
+
+logrotate "production.log" do
+  files "#{node[:fresqui][:dir]}/shared/log/production.log"
+  enable true
+  frequency 'daily'
+end
+
+# memcached_instance "fresqui"
 
 web_app "fresqui" do
   server_name node[:fresqui][:server_name]

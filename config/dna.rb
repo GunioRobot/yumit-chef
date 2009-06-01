@@ -65,7 +65,8 @@ dna = {
 
   :users => [{
     :username => 'capistrano',
-    :authorized_keys => "ssh-rsa AAAAB3NzaC1yc2EAAAABIwAAAQEAw5b4okzvmo9TKfqz6zAP4Y38xnBN4UIGfbOO8OrrD9YPOBQiEd8RAvPrZ/oxTSutxABqEtUDowBa36WlRkGX9OVUvwXj+yec5BaBGPk4mqp+7YZJSeKhOrrWKVr43q9uNDxuChJD1+MwME6HnE/RvONPpF8OKEEfkYqd1GmxwGIMhgNK47MsK1lwAG06+5oMv6HySUWxMgoG25BaxK2+0Y77WDUqgaIwnymgOZekBPdPnixP8C4cWqH2gD/HNikVVOEd2gvztsMGbDfAiIkc/ryqcT3SM9ES565qKPsY5ZpDQfXsdl6RMwtwATOg3vLi9OBW4CaaDgIOBwfGppH3Vw== mbc@mbcbook.local",
+    :authorized_keys => "ssh-rsa AAAAB3NzaC1yc2EAAAABIwAAAQEAw5b4okzvmo9TKfqz6zAP4Y38xnBN4UIGfbOO8OrrD9YPOBQiEd8RAvPrZ/oxTSutxABqEtUDowBa36WlRkGX9OVUvwXj+yec5BaBGPk4mqp+7YZJSeKhOrrWKVr43q9uNDxuChJD1+MwME6HnE/RvONPpF8OKEEfkYqd1GmxwGIMhgNK47MsK1lwAG06+5oMv6HySUWxMgoG25BaxK2+0Y77WDUqgaIwnymgOZekBPdPnixP8C4cWqH2gD/HNikVVOEd2gvztsMGbDfAiIkc/ryqcT3SM9ES565qKPsY5ZpDQfXsdl6RMwtwATOg3vLi9OBW4CaaDgIOBwfGppH3Vw== mbc@mbcbook.local\n" +
+      "ssh-rsa AAAAB3NzaC1yc2EAAAABIwAAAQEAvVnx9RVpN9vPBeLj+vocz7466jUHMI+8CIXjhmbj6Ngh5TyLgh3ahGudnp4yoGoryEwU3f0dy82wMF10pQAtvgJdyRh2jY364hQP72Utbne3NTRH/NA/hg8sg5UQS/lOll52zbOwrTPsODcvsPDzUjbhbvOtowJTLHes/E+aTymQeAFvNj2+rPoIhbW/RxrBs+/b+tQKKOwoC4v1oIx95XKwGA/+IiT5pal6XVmJsMgbDNO3ENu5TzbY99sd5U0pbOIng8JNHZveKMyrtsmtdSnXxPg+w1eZW/c07k+8nbu8RuuCxV2Ax/wWdQfie8Oy3nwf6Ph2CK4vLBMxa/s3YQ== mbc@MacActivo.local",
     :gid => 4001,
     :uid => 4001
   }],
@@ -79,7 +80,13 @@ dna = {
     :dir => '/www/fresqui',
     :server_name => 'fresqui.com',
     :server_aliases => ['www.fresqui.com'],
-    :user => 'capistrano'
+    :user => 'capistrano',
+    :db => {
+      :name => 'fresquidb',
+      :user => 'root',
+      :password => 'belen3',
+      :host => 'localhost'
+    }
   },
 
   :motd => "Welcome to the Fresqui EC2 web server instance.\n\n" +
@@ -98,7 +105,7 @@ dna = {
     'snapshots',
     'packages',
     'mysql::server',
-    'sphinx',
+#    'sphinx',
     'users',
     'groups',
     'postfix',
