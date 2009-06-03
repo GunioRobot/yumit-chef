@@ -19,7 +19,7 @@ gem_package 'sqlite3-ruby' do
   version '1.2.4'
 end
 
-['', '/shared', '/releases', '/shared/system/config', '/shared/log'].each do |path|
+['', '/shared', '/releases', '/shared/system', '/shared/system/config', '/shared/log'].each do |path|
   directory "#{node[:fresqui][:dir]}#{path}" do
     action :create
     recursive true
@@ -45,6 +45,11 @@ logrotate "production.log" do
   frequency 'daily'
 end
 
+['convert', 'mogrify', 'identify'].each do |cmd|
+  link "/usr/local/bin/#{cmd}" do
+    to "/usr/bin/#{cmd}" 
+  end
+end
 # memcached_instance "fresqui"
 
 web_app "fresqui" do
