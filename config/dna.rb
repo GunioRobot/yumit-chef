@@ -3,7 +3,7 @@ require 'json'
 
 dna = {
   :host => {
-    :hostname => 'front',
+    :hostname => 'mailbot',
     :domain => 'fresqui.com',
     :ipaddress => '79.125.12.4'
   },

@@ -25,7 +25,7 @@ end
     recursive true
     owner node[:fresqui][:user]
     group "www-data"
-    mode 02774
+    mode 02775
   end
 end
 
