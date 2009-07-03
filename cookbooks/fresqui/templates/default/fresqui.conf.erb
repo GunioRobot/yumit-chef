@@ -30,4 +30,24 @@
     Order allow,deny
     Allow from all
   </Directory>
+
+  <Location /> 
+    # Insert filter 
+    SetOutputFilter DEFLATE 
+
+    # Netscape 4.x has some problems... 
+    BrowserMatch ^Mozilla/4 gzip-only-text/html 
+
+    # Netscape 4.06-4.08 have some more problems 
+    BrowserMatch ^Mozilla/4\.0[678] no-gzip 
+
+    # MSIE masquerades as Netscape, but it is fine 
+    BrowserMatch \bMSIE !no-gzip !gzip-only-text/html 
+  </Location>  
+
+  <FilesMatch "\.(ico|pdf|flv|jpe?g|png|gif|js|css|swf)?.+$">
+      ExpiresActive On
+      ExpiresDefault "access plus 1 year"
+  </FilesMatch>
+
 </VirtualHost>

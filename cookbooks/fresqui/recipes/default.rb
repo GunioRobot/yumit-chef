@@ -1,4 +1,6 @@
 include_recipe "apache2"
+include_recipe "apache2::mod_expires"
+include_recipe "apache2::mod_deflate"
 include_recipe "passenger"
 include_recipe "rails"
 include_recipe "runit"

@@ -10,6 +10,12 @@ node[:users].each do |user|
 
   home_dir = "/home/#{user[:username]}"
   
+  directory home_dir do
+    owner user[:uid]
+    group user[:gid]
+    mode 0755
+  end
+
   user user[:username] do
     password user[:password].crypt(user[:username]) if user[:password]
     uid user[:uid]
