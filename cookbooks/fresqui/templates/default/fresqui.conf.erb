@@ -1,4 +1,4 @@
-<VirtualHost *:80>
+<VirtualHost *:8080>
   ServerName <%= @params[:server_name] %>
   <% @params[:server_aliases].to_a.each do |a| %>
   ServerAlias <%= a %>
@@ -6,8 +6,6 @@
   DocumentRoot <%= @params[:docroot] %>
 
   RailsBaseURI /
-  RailsMaxPoolSize <%= @node[:rails][:max_pool_size] %>
-  RailsPoolIdleTime 3600
   RailsEnv '<%= @node[:rails][:environment] %>'
 
   LogLevel info

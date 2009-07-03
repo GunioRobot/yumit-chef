@@ -45,11 +45,17 @@ dna = {
   },
 
   :apache => {
-    :contact => 'jorgedf@fresqui.com'
+    :contact => 'jorgedf@fresqui.com',
+    :listen_ports => ['8080']
+  },
+  
+  :squid => {
+    :cache_dir => '/var/cache/squid'
   },
 
   :passenger => {
-    :version => '2.2.2'
+    :version => '2.2.2',
+    :max_pool_size => 10
   },
 
   :rails => {
@@ -79,7 +85,7 @@ dna = {
   :fresqui => {
     :dir => '/www/fresqui',
     :server_name => 'fresqui.com',
-    :server_aliases => ['beta.fresqui.com', 'www.fresqui.com'],
+    :server_aliases => ['beta.fresqui.com', 'www.fresqui.com', 'front.fresqui.com'],
     :user => 'capistrano',
     :db => {
       :name => 'fresquidb',
@@ -109,6 +115,7 @@ dna = {
     'users',
     'groups',
     'postfix',
+    'squid',
     'fresqui'
   ]
 }

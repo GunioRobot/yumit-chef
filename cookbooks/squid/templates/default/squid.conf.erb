@@ -1,0 +1,27 @@
+http_port 80 accel vhost vport
+cache_peer 127.0.0.1 parent 8080 0 originserver default
+
+collapsed_forwarding on
+refresh_stale_hit 60 seconds
+
+acl localhost src 127.0.0.1
+acl all src 0.0.0.0/0.0.0.0
+http_access allow all
+
+acl PURGE method PURGE
+http_access allow PURGE localhost
+http_access deny PURGE
+
+# cache_mem - remember each G on disk requires 100mb mem apart from what is specified here (MB level1_dirs level2_dirs)
+cache_dir aufs <%= @node[:squid][:cache_dir] %> 8000 14 256
+
+cache_mem 100 MB
+cache_swap_low 90
+cache_swap_high 95
+
+maximum_object_size 4096 KB
+maximum_object_size_in_memory 1024 KB
+
+strip_query_terms off
+
+access_log /var/log/squid/access.log
