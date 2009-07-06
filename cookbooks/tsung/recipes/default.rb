@@ -6,6 +6,10 @@ package "perl" do
   action :install
 end
 
+package "libtemplate-perl" do
+  action :install
+end
+
 package "erlang" do
   action :install
 end

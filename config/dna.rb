@@ -36,8 +36,9 @@ dna = {
     :server_root_password => 'belen3',
     :bind_address => '127.0.0.1',
     :tunable => {
-      :key_buffer => '250M',
-      :net_read_timeout => '30'
+      :max_connections => 100,
+      :key_buffer => '1M',
+      :net_read_timeout => 30
     },
   },
 
@@ -46,11 +47,14 @@ dna = {
   },
 
   :apache => {
-    :contact => 'jorgedf@fresqui.com'
+    :contact => 'jorgedf@fresqui.com',
+    :listen_ports => [8080]
   },
 
   :passenger => {
-    :version => '2.2.2'
+    :version => '2.2.4',
+    :max_pool_size => 12,
+    :stat_throttle_rate => 10
   },
 
   :rails => {
@@ -80,7 +84,7 @@ dna = {
   :fresqui => {
     :dir => '/www/fresqui',
     :server_name => 'fresqui.com',
-    :server_aliases => ['beta.fresqui.com', 'www.fresqui.com'],
+    :server_aliases => ['beta.fresqui.com', 'test.fresqui.com'],
     :user => 'capistrano',
     :db => {
       :name => 'fresquidb',
@@ -88,6 +92,10 @@ dna = {
       :password => 'belen3',
       :host => 'localhost'
     }
+  },
+  
+  :squid => {
+    :cache_dir => '/var/cache/squid'
   },
 
   :motd => "Welcome to the Fresqui EC2 web server instance.\n\n" +
@@ -106,6 +114,7 @@ dna = {
     'snapshots',
     'packages',
     'mysql::server',
+    'squid',
 #    'sphinx',
     'users',
     'groups',

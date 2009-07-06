@@ -11,7 +11,9 @@ end
 
 gem_package 'hpricot' do
   action :install
-  version '0.6.164'
+#  version '0.6.164'
+  version "0.8.1"
+  source "http://code.whytheluckystiff.net"
 end
 
 gem_package 'sqlite3-ruby' do
