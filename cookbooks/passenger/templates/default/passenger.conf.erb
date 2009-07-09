@@ -3,3 +3,4 @@ PassengerRuby <%= @node[:ruby_path] %>
 <% if @node[:passenger].has_key?(:max_pool_size) %>PassengerMaxPoolSize <%= @node[:passenger][:max_pool_size] %><% end %>
 <% if @node[:passenger].has_key?(:use_global_queue) %>PassengerUseGlobalQueue <%= @node[:passenger][:use_global_queue] %><% end %>
 <% if @node[:passenger].has_key?(:rails_env) %>RailsEnv <%= @node[:passenger][:rails_env] %><% end %>
+<% if @node[:passenger].has_key?(:stat_throttle_rate) %>PassengerStatThrottleRate <%= @node[:passenger][:stat_throttle_rate] %><% end %>

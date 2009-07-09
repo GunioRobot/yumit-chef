@@ -13,7 +13,9 @@ end
 
 gem_package 'hpricot' do
   action :install
-  version '0.6.164'
+#  version '0.6.164'
+  version "0.8.1"
+  source "http://code.whytheluckystiff.net"
 end
 
 gem_package 'sqlite3-ruby' do
@@ -29,6 +31,10 @@ end
     group "www-data"
     mode 02775
   end
+end
+
+link "#{node[:fresqui][:dir]}/shared/add_expires_header" do
+ to "#{node[:fresqui][:dir]}/current/public"
 end
 
 template "#{node[:fresqui][:dir]}/shared/system/config/database.yml" do
@@ -57,6 +63,7 @@ end
 web_app "fresqui" do
   server_name node[:fresqui][:server_name]
   docroot "#{node[:fresqui][:dir]}/current/public"
+  add_expires_header_path "#{node[:fresqui][:dir]}/shared/add_expires_header"  
   server_aliases [node[:hostname]] + (node[:fresqui][:server_aliases] || [])
   template "fresqui.conf.erb"
 end

@@ -43,9 +43,19 @@
     BrowserMatch \bMSIE !no-gzip !gzip-only-text/html 
   </Location>  
 
-  <FilesMatch "\.(ico|pdf|flv|jpe?g|png|gif|js|css|swf)?.+$">
-      ExpiresActive On
-      ExpiresDefault "access plus 1 year"
-  </FilesMatch>
+  RewriteCond %{REQUEST_URI} (css|js|jpe?g|png|gif|ico)$ [NC]
+  RewriteCond %{QUERY_STRING} ^.+$
+  RewriteRule ^(.*)$ <%= @params[:add_expires_header_path] %>%{REQUEST_URI} [QSA]
 
+  # The add_expires_header directory is just a symlink to public
+  # See: http://www.stephensykes.com/blog_perm.html?157
+  <Directory <%= @params[:add_expires_header_path] %>>
+    ExpiresActive On
+    ExpiresDefault "access plus 10 years"
+    Options FollowSymLinks
+    AllowOverride None
+    Order allow,deny
+    Allow from all
+  </Directory>
+  
 </VirtualHost>

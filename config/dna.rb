@@ -35,8 +35,9 @@ dna = {
     :ec2_path => '/db/mysql',
     :server_root_password => 'belen3',
     :tunable => {
-      :key_buffer => '250M',
-      :net_read_timeout => '30'
+      :max_connections => 100,
+      :key_buffer => '1M',
+      :net_read_timeout => 30
     },
   },
 
@@ -54,8 +55,9 @@ dna = {
   },
 
   :passenger => {
-    :version => '2.2.2',
-    :max_pool_size => 10
+    :version => '2.2.4',
+    :max_pool_size => 12,
+    :stat_throttle_rate => 10
   },
 
   :rails => {
@@ -94,6 +96,10 @@ dna = {
       :host => 'localhost'
     }
   },
+  
+  :squid => {
+    :cache_dir => '/var/cache/squid'
+  },
 
   :motd => "Welcome to the Fresqui EC2 web server instance.\n\n" +
            "This instance is managed by chef. Access by ssh should never be used\n" +
@@ -111,6 +117,7 @@ dna = {
     'snapshots',
     'packages',
     'mysql::server',
+    'squid',
 #    'sphinx',
     'users',
     'groups',

@@ -2,11 +2,15 @@ http_port 80 accel vhost vport
 cache_peer 127.0.0.1 parent 8080 0 originserver default
 
 collapsed_forwarding on
-refresh_stale_hit 60 seconds
+refresh_stale_hit 5 seconds
 
-acl localhost src 127.0.0.1
+acl localhost src 127.0.0.1/255.255.255.255
 acl all src 0.0.0.0/0.0.0.0
+acl PURGE method purge
+
 http_access allow all
+http_access allow purge localhost
+http_access deny purge
 
 acl PURGE method PURGE
 http_access allow PURGE localhost
