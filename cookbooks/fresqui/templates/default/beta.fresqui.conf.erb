@@ -1,0 +1,4 @@
+<VirtualHost *:8080>
+  ServerName <%= @params[:server_name] %>
+  RedirectPermanent / <%= @params[:redirect_to] %>
+</VirtualHost>

@@ -47,11 +47,34 @@ template "#{node[:fresqui][:dir]}/shared/system/config/mailer.yml" do
   source "mailer.yml.erb"
 end
 
+template "#{node[:fresqui][:dir]}/shared/kill_growing_processes.rb" do
+  source "kill_growing_processes.rb.erb"
+end
+
+cron "kill_growing_processes" do
+  minute "*/1"
+  command "ruby #{node[:fresqui][:dir]}/shared/kill_growing_processes.rb 100 >> #{node[:fresqui][:dir]}/shared/log/process_killer.log 2>&1"
+end
+
+
+logrotate "production.log" do
+  files "#{node[:fresqui][:dir]}/shared/log/process_killer.log"
+  enable true
+  frequency 'daily'
+end
+
 logrotate "production.log" do
   files "#{node[:fresqui][:dir]}/shared/log/production.log"
   enable true
   frequency 'daily'
 end
+
+logrotate "promote.log" do
+  files "#{node[:fresqui][:dir]}/shared/log/promote.log"
+  enable true
+  frequency 'daily'
+end
+
 
 ['convert', 'mogrify', 'identify'].each do |cmd|
   link "/usr/local/bin/#{cmd}" do
@@ -66,4 +89,10 @@ web_app "fresqui" do
   add_expires_header_path "#{node[:fresqui][:dir]}/shared/add_expires_header"  
   server_aliases [node[:hostname]] + (node[:fresqui][:server_aliases] || [])
   template "fresqui.conf.erb"
+end
+
+web_app "beta.fresqui" do
+  server_name "beta.fresqui.com"
+  redirect_to "http://#{node[:fresqui][:server_name]}"
+  template "beta.fresqui.conf.erb"
 end

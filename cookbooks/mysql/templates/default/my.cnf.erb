@@ -58,7 +58,7 @@ bind-address            = <%= @node[:mysql][:bind_address] %>
 #
 # * Fine Tuning
 #
-key_buffer              = <%= @node[:mysql][:key_buffer] %>
+key_buffer              = <%= @node[:mysql][:tunable][:key_buffer] %>
 max_allowed_packet      = 16M
 thread_stack            = 128K
 thread_cache_size       = 8
@@ -76,7 +76,8 @@ back_log                = <%= @node[:mysql][:tunable][:back_log] %>
 table_cache             = <%= @node[:mysql][:tunable][:table_cache] %>
 max_heap_table_size     = <%= @node[:mysql][:tunable][:max_heap_table_size] %>
 
-innodb_buffer_pool_size = 300M
+tmp_table_size          = <%= @node[:mysql][:tunable][:max_heap_table_size] %>
+innodb_buffer_pool_size = 200M
 innodb_additional_mem_pool_size = 24M  
 innodb_log_file_size = 256M  
 innodb_log_buffer_size = 4M  

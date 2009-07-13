@@ -36,8 +36,9 @@ dna = {
     :server_root_password => 'belen3',
     :tunable => {
       :max_connections => 100,
-      :key_buffer => '1M',
-      :net_read_timeout => 30
+      :key_buffer => '40M',
+      :net_read_timeout => 30,
+      :max_heap_table_size => "256MB"
     },
   },
 
@@ -87,7 +88,7 @@ dna = {
   :fresqui => {
     :dir => '/www/fresqui',
     :server_name => 'fresqui.com',
-    :server_aliases => ['beta.fresqui.com', 'www.fresqui.com', 'front.fresqui.com'],
+    :server_aliases => ['www.fresqui.com', 'front.fresqui.com'],
     :user => 'capistrano',
     :db => {
       :name => 'fresquidb',

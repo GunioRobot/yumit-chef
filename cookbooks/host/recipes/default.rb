@@ -28,7 +28,7 @@ end
 execute "Set hostname" do
   command "/etc/init.d/hostname.sh"
   # Fix problem with hostname.sh exiting with 1 in spite of success
-  returns 1 if node[:platform] == 'ubuntu'
+  # returns 1 if node[:platform] == 'ubuntu'
   only_if { `hostname -f`.strip != bootstrap_fqdn }
 end
 
