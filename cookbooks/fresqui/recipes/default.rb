@@ -93,6 +93,7 @@ end
 
 web_app "beta.fresqui" do
   server_name "beta.fresqui.com"
-  redirect_to "http://#{node[:fresqui][:server_name]}"
+  server_aliases ['www.fresqui.com']
+  redirect_to "http://#{node[:fresqui][:server_name]}/"
   template "beta.fresqui.conf.erb"
 end
