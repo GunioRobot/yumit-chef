@@ -3,8 +3,8 @@ require 'json'
 
 dna = {
   :host => {
-    :hostname => 'mailbot',
-    :domain => 'fresqui.com',
+    :hostname => 'yumit.com',
+    :domain => 'yumit.com',
     :ipaddress => '79.125.12.4'
   },
 
@@ -47,7 +47,7 @@ dna = {
   },
 
   :apache => {
-    :contact => 'jorgedf@fresqui.com',
+    :contact => 'jorgedf@yumit.com',
     :listen_ports => ['8080']
   },
   
@@ -85,13 +85,13 @@ dna = {
     :members => ['www-data', 'capistrano']
   }],
 
-  :fresqui => {
-    :dir => '/www/fresqui',
-    :server_name => 'fresqui.com',
-    :server_aliases => ['front.fresqui.com'],
+  :yumit => {
+    :dir => '/www/yumit',
+    :server_name => 'yumit.com',
+    :server_aliases => ['yumit.com'],
     :user => 'capistrano',
     :db => {
-      :name => 'fresquidb',
+      :name => 'yumitdb',
       :user => 'root',
       :password => 'belen3',
       :host => 'localhost'
@@ -102,7 +102,7 @@ dna = {
     :cache_dir => '/var/cache/squid'
   },
 
-  :motd => "Welcome to the Fresqui EC2 web server instance.\n\n" +
+  :motd => "Welcome to the Yumit EC2 web server instance.\n\n" +
            "This instance is managed by chef. Access by ssh should never be used\n" +
            "to install packages, change configuration files or manually compile\n"  +
            "libraries. All of these tasks should be handled through changing the\n" +
@@ -124,7 +124,7 @@ dna = {
     'groups',
     'postfix',
     'squid',
-    'fresqui'
+    'yumit'
   ]
 }
 
