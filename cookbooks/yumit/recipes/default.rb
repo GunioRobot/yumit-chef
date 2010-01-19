@@ -11,18 +11,6 @@ gem_package 'daemons' do
   version '1.0.10'
 end
 
-gem_package 'hpricot' do
-  action :install
-#  version '0.6.164'
-  version "0.8.1"
-  source "http://code.whytheluckystiff.net"
-end
-
-gem_package 'sqlite3-ruby' do
-  action :install
-  version '1.2.4'
-end
-
 ['', '/shared', '/releases', '/shared/system', '/shared/system/config', '/shared/log'].each do |path|
   directory "#{node[:yumit][:dir]}#{path}" do
     action :create
