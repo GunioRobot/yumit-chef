@@ -13,7 +13,7 @@ if postfix[:smtp_sasl_auth_enable] == "yes"
   postfix[:smtp_sasl_password_maps] = "hash:/etc/postfix/sasl_passwd"
   postfix[:smtp_sasl_security_options] = "noanonymous"
   postfix[:smtp_tls_cafile] = "/etc/postfix/cacert.pem"
-  postfix[:smtp_use_tls] = "yes"
+  postfix[:smtp_use_tls] = "no"
   postfix[:smtp_sasl_user_name] = "" unless postfix.has_key?(:smtp_sasl_user_name)
   postfix[:smtp_sasl_passwd] = "" unless postfix.has_key?(:smtp_sasl_passwd)
 end
