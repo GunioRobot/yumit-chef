@@ -3,7 +3,7 @@ require 'json'
 
 dna = {
   :host => {
-    :hostname => 'yumit.com',
+    :hostname => 'server',
     :domain => 'yumit.com',
     :ipaddress => '79.125.12.4'
   },
