@@ -33,7 +33,7 @@ dna = {
   :mysql => {
     :datadir => '/var/lib/mysql',
     :ec2_path => '/db/mysql',
-    :server_root_password => 'reyes28015',
+    :server_root_password => 'belen3',
     :tunable => {
       :max_connections => 100,
       :key_buffer => '40M',
@@ -92,13 +92,18 @@ dna = {
     :db => {
       :name => 'yumitdb',
       :user => 'root',
-      :password => 'reyes28015',
+      :password => 'belen3',
       :host => 'localhost'
     }
   },
   
   :squid => {
     :cache_dir => '/var/cache/squid'
+  },
+
+  :postfix => {
+    :smtp_use_tls => 'no',
+    :mydomain     => 'yumit.com'
   },
 
   :motd => "Welcome to the Yumit EC2 web server instance.\n\n" +
@@ -123,7 +128,8 @@ dna = {
     'groups',
     'postfix',
     'squid',
-    'yumit'
+    'yumit',
+    'redis'
   ]
 }
 

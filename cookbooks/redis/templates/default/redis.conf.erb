@@ -1,0 +1,29 @@
+port 6379
+daemonize yes
+databases 16
+
+save 900 1
+save 300 10
+save 60 10000
+
+pidfile <%= @pidfile %>
+logfile <%= @logfile %>
+dir /db/redis/
+rdbcompression yes
+dbfilename dump.rdb
+
+#maxmemory 128mb
+appendonly yes
+appendfsync everysec
+
+vm-enabled yes
+vm-swap-file /tmp/redis.swap
+vm-max-memory 128mb
+vm-page-size 32
+vm-pages 33554432
+vm-max-threads 4
+glueoutputbuf yes
+hash-max-zipmap-entries 64
+hash-max-zipmap-value 512
+activerehashing yes
+
