@@ -74,7 +74,8 @@ dna = {
   :users => [{
     :username => 'capistrano',
     :authorized_keys => "ssh-rsa AAAAB3NzaC1yc2EAAAABIwAAAQEAw5b4okzvmo9TKfqz6zAP4Y38xnBN4UIGfbOO8OrrD9YPOBQiEd8RAvPrZ/oxTSutxABqEtUDowBa36WlRkGX9OVUvwXj+yec5BaBGPk4mqp+7YZJSeKhOrrWKVr43q9uNDxuChJD1+MwME6HnE/RvONPpF8OKEEfkYqd1GmxwGIMhgNK47MsK1lwAG06+5oMv6HySUWxMgoG25BaxK2+0Y77WDUqgaIwnymgOZekBPdPnixP8C4cWqH2gD/HNikVVOEd2gvztsMGbDfAiIkc/ryqcT3SM9ES565qKPsY5ZpDQfXsdl6RMwtwATOg3vLi9OBW4CaaDgIOBwfGppH3Vw== mbc@mbcbook.local\n" +
-                        "ssh-rsa AAAAB3NzaC1yc2EAAAABIwAAAQEAsaBcf6co1Z60Pl57IfoAB20Y1xfWVdw7F2vmKZC83byw1XdQSoUTarkcPOYoFMvAUfTlCGaj4Fn1RTOdvNAIs/p3b6TdZiiEvmIKcpFKoh31Gvul0SbJli279eLm7QxztAz9xTtXbprPAyZdUdkFMQ4TOeJf1nl/Mv8qUvvTQJHn5d+sLW3lPMAbDoPijkSTV9B3H4G0WhHvWmyTNaWVjng68xeEEKFA+d/l8G6AZyFhc7FtryNfpPOV3svahd6kGCDPohphUDAqQX+cJKRmbLJ6VgZhbnAOQQmBoU2QPkp2+0AEmdheIgeuH+B+/ngp0ZlSRmTG1LwZtWAPYqvjSw== xurde@Macintosh.local",
+                        "ssh-rsa AAAAB3NzaC1yc2EAAAABIwAAAQEAsaBcf6co1Z60Pl57IfoAB20Y1xfWVdw7F2vmKZC83byw1XdQSoUTarkcPOYoFMvAUfTlCGaj4Fn1RTOdvNAIs/p3b6TdZiiEvmIKcpFKoh31Gvul0SbJli279eLm7QxztAz9xTtXbprPAyZdUdkFMQ4TOeJf1nl/Mv8qUvvTQJHn5d+sLW3lPMAbDoPijkSTV9B3H4G0WhHvWmyTNaWVjng68xeEEKFA+d/l8G6AZyFhc7FtryNfpPOV3svahd6kGCDPohphUDAqQX+cJKRmbLJ6VgZhbnAOQQmBoU2QPkp2+0AEmdheIgeuH+B+/ngp0ZlSRmTG1LwZtWAPYqvjSw== xurde@Macintosh.local\n"+
+                        "ssh-rsa AAAAB3NzaC1yc2EAAAABIwAAAQEAziTPchyB5B0v+jFNTijHOZu/LL5cnpUbfCjA972O9BcW1OV+A4THXfpM4Rd4hYhaOUcIZyWp8tR1x96FiRs5bwtR0GraKrmMEg3en8RsxZc6HUZZhDK080WCGhWNDPRBf5018MVth+Ewm4nVbyy4cwxn9O6iIROFlX9vtk2eQoAuJkNSlW9mFXXUOT+FY5HUkznQ2ctOXlcKYHJCsvFLKanfIEQXvHT81X1UJJs7iArF2Tddjj/sN6dZx5CrTjGph2mHz6upENzZTdz844++S45h/oPblXnnlu+puv1k6ALhMPdEVMqFY5jOxfWzkJG6wfXplyTFYiL9flDdM1SUCw== pablo.delgado@nb-pdelgado.local\n",
     :gid => 4001,
     :uid => 4001
   }],
