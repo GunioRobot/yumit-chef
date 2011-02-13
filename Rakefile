@@ -1,9 +1,18 @@
 REMOTE_CHEF_PATH = "/etc/chef" # Where to find upstream cookbooks
 
+def remote_shell(command)
+  sh "ssh #{ENV['server']} \"#{command}\""
+end
+
 desc "Bootstrap a new server to get ready to run chef"
 task :bootstrap do
-  sh "scp #{File.join(File.dirname(__FILE__), 'chef-bootstrap.rb')} #{ENV['server']}:/tmp/"
-  sh "ssh #{ENV['server']} \"ruby /tmp/chef-bootstrap.rb\""
+   remote_shell "sudo apt-get -y update"
+   remote_shell "sudo apt-get -q -y install ruby ruby1.8-dev libopenssl-ruby1.8 rdoc ri irb build-essential wget"
+   remote_shell "curl -L 'http://production.cf.rubygems.org/rubygems/rubygems-1.5.2.tgz' | tar xvzf -"
+   remote_shell "cd rubygems* && sudo ruby setup.rb --no-ri --no-rdoc"
+   remote_shell "sudo ln -sfv /usr/bin/gem1.8 /usr/bin/gem"
+   remote_shell "sudo gem install rake bundler"
+   remote_shell "sudo gem install rdoc chef ohai --no-ri --no-rdoc --source http://gems.opscode.com --source http://gems.rubyforge.org"
 end
 
 desc "Test your cookbooks and config files for syntax errors"

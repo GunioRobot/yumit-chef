@@ -1,5 +1,7 @@
 postfix Mash.new unless attribute?("postfix")
 
+fqdn = "#{node[:host][:hostname]}.#{node[:host][:domain]}"
+
 postfix[:mail_type] = "client" unless postfix.has_key?(:mail_type)
 postfix[:myhostname] = fqdn unless postfix.has_key?(:myhostname)
 postfix[:mydomain] = domain unless postfix.has_key?(:mydomain)

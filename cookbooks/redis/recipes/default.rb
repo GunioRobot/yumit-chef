@@ -24,8 +24,8 @@ bash "install_redis" do
   user "root"
   cwd "/tmp"
   code <<-EOBASH
-    wget http://github.com/antirez/redis/tarball/v1.3.11
-    tar xzf antirez-redis-v1.3.11-0-g2cf5e51.tar.gz
+    wget --no-check-certificate http://github.com/antirez/redis/tarball/v1.3.11 -O redis-v1.3.11.tar.gz
+    tar xzf redis-v1.3.11.tar.gz
     cd antirez-redis-b2739d9
     make
     cd ..

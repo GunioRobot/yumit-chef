@@ -25,10 +25,9 @@ bash "Set mailname for postfix" do
   not_if "grep #{node[:host][:hostname]} /etc/mailname"
 end
 
-execute "Set hostname" do
-  command "/etc/init.d/hostname.sh"
-  # Fix problem with hostname.sh exiting with 1 in spite of success
-  # returns 1 if node[:platform] == 'ubuntu'
-  only_if { `hostname -f`.strip != bootstrap_fqdn }
-end
-
+# execute "Set hostname" do
+#   command "service hostname restart"
+#   # Fix problem with hostname.sh exiting with 1 in spite of success
+#   # returns 1 if node[:platform] == 'ubuntu'
+#   only_if { `hostname -f`.strip != bootstrap_fqdn }
+# end

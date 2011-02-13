@@ -25,14 +25,11 @@ link "#{node[:yumit][:dir]}/shared/add_expires_header" do
  to "#{node[:yumit][:dir]}/current/public"
 end
 
-template "#{node[:yumit][:dir]}/shared/system/config/database.yml" do
-  owner node[:yumit][:user]
-  source "database.yml.erb"
-end
-
-template "#{node[:yumit][:dir]}/shared/system/config/mailer.yml" do
-  owner node[:yumit][:user]
-  source "mailer.yml.erb"
+%w(database mailer config facebooker flickr).each do |template_file|
+  template "#{node[:yumit][:dir]}/shared/system/config/#{template_file}.yml" do
+    owner node[:yumit][:user]
+    source "#{template_file}.yml.erb"
+  end
 end
 
 template "#{node[:yumit][:dir]}/shared/kill_growing_processes.rb" do
@@ -66,7 +63,7 @@ end
 
 ['convert', 'mogrify', 'identify'].each do |cmd|
   link "/usr/local/bin/#{cmd}" do
-    to "/usr/bin/#{cmd}" 
+    to "/usr/bin/#{cmd}"
   end
 end
 # memcached_instance "yumit"
@@ -74,14 +71,7 @@ end
 web_app "yumit" do
   server_name node[:yumit][:server_name]
   docroot "#{node[:yumit][:dir]}/current/public"
-  add_expires_header_path "#{node[:yumit][:dir]}/shared/add_expires_header"  
+  add_expires_header_path "#{node[:yumit][:dir]}/shared/add_expires_header"
   server_aliases [node[:hostname]] + (node[:yumit][:server_aliases] || [])
   template "yumit.conf.erb"
-end
-
-web_app "beta.yumit" do
-  server_name "beta.yumit.com"
-  server_aliases ['www.yumit.com']
-  redirect_to "http://#{node[:yumit][:server_name]}/"
-  template "beta.yumit.conf.erb"
 end
