@@ -123,6 +123,7 @@ dna = {
     'packages',
     'mysql::server',
     'squid',
+    'memcached',
 #    'sphinx',
     'users',
     'groups',
