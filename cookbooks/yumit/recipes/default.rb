@@ -66,7 +66,7 @@ end
 
 ['convert', 'mogrify', 'identify'].each do |cmd|
   link "/usr/local/bin/#{cmd}" do
-    to "/usr/bin/#{cmd}" 
+    to "/usr/bin/#{cmd}"
   end
 end
 # memcached_instance "yumit"
@@ -74,7 +74,7 @@ end
 web_app "yumit" do
   server_name node[:yumit][:server_name]
   docroot "#{node[:yumit][:dir]}/current/public"
-  add_expires_header_path "#{node[:yumit][:dir]}/shared/add_expires_header"  
+  add_expires_header_path "#{node[:yumit][:dir]}/shared/add_expires_header"
   server_aliases [node[:hostname]] + (node[:yumit][:server_aliases] || [])
   template "yumit.conf.erb"
 end

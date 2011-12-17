@@ -210,7 +210,7 @@ yubikey_client_request (yubikey_client_t client,
   //int proxyPort = 8080;
   //char *proxy = "proxy.example.com";
   //char *proxyPwd = "username:password";
-  
+
   asprintf (&url, url_template, client->client_id, yubikey);
   if (!url)
     return YUBIKEY_CLIENT_OUT_OF_MEMORY;

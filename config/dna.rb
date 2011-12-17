@@ -50,7 +50,7 @@ dna = {
     :contact => 'jorgedf@yumit.com',
     :listen_ports => ['8080']
   },
-  
+
   :squid => {
     :cache_dir => '/var/cache/squid'
   },
@@ -97,7 +97,7 @@ dna = {
       :host => 'localhost'
     }
   },
-  
+
   :squid => {
     :cache_dir => '/var/cache/squid'
   },

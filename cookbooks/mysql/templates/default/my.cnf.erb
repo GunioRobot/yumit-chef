@@ -78,9 +78,9 @@ max_heap_table_size     = <%= @node[:mysql][:tunable][:max_heap_table_size] %>
 
 tmp_table_size          = <%= @node[:mysql][:tunable][:max_heap_table_size] %>
 innodb_buffer_pool_size = 200M
-innodb_additional_mem_pool_size = 24M  
-innodb_log_file_size = 256M  
-innodb_log_buffer_size = 4M  
+innodb_additional_mem_pool_size = 24M
+innodb_log_file_size = 256M
+innodb_log_buffer_size = 4M
 innodb_flush_log_at_trx_commit = 2 # Write to log but don't flush on commit (it will be flushed every "second")
 innodb_flush_method=O_DIRECT
 

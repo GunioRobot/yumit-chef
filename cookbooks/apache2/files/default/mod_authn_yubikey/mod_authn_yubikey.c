@@ -1,12 +1,12 @@
 /*
  * Copyright [2008] [Jens Frey]
- * 
+ *
  * Licensed under the Apache License, Version 2.0 (the "License"); you
  * may not use this file except in compliance with the License.  You
  * may obtain a copy of the License at
  *
  *  http://www.apache.org/licenses/LICENSE-2.0
- * 
+ *
  * Unless required by applicable law or agreed to in writing, software
  * distributed under the License is distributed on an "AS IS" BASIS,
  * WITHOUT WARRANTIES OR CONDITIONS OF ANY KIND, either express or
@@ -17,7 +17,7 @@
 /*
  * If you have any questions feel free to contact me
  * at jens.frey@coffeecrew.org
- * 
+ *
  */
 #include "httpd.h"
 #include "http_config.h"
@@ -83,22 +83,22 @@ typedef struct
    */
   int requireSecure;
   /* If any error happens, this will redirect you to the given error page,
-   * or an internally generated error page will be shown. 
+   * or an internally generated error page will be shown.
    * Use this is you want to customize the error page.
    */
   int externalErrorPage;
-  /* This is the temporary filename authenticated user are saved in. 
+  /* This is the temporary filename authenticated user are saved in.
    * This could possibly be done with an in memory version of s.th. similar
    * to the database
    */
   const char *tmpAuthDbFilename;
-  /* This is the file where the actual user/password connection happens. So 
-   * the module knows where it can find the file where the tokenId/username 
+  /* This is the file where the actual user/password connection happens. So
+   * the module knows where it can find the file where the tokenId/username
    * mapping happens.
    */
   const char *userAuthDbFilename;
-  /* TODO: NYI 
-   * This is required to be given if you want to use another authentication 
+  /* TODO: NYI
+   * This is required to be given if you want to use another authentication
    * provider which supports the yubikey token, but not via yubicos site.
    */
   //const char *validationUrl;
@@ -197,9 +197,9 @@ static int passwordExpired(const char *user,
     return FALSE;
 }
 
-static int isUserValid(const char *user, 
-		       const char *password, 
-		       yubiauth_dir_cfg *cfg, 
+static int isUserValid(const char *user,
+		       const char *password,
+		       yubiauth_dir_cfg *cfg,
 		       request_rec *r)
 {
 
@@ -221,7 +221,7 @@ static int isUserValid(const char *user,
 
     if (status != APR_SUCCESS) {
         ap_log_rerror(APLOG_MARK, APLOG_ERR, status, r,
-                      LOG_PREFIX "Could not open AuthYkUserFile file: %s", 
+                      LOG_PREFIX "Could not open AuthYkUserFile file: %s",
 		      cfg->userAuthDbFilename);
         return FALSE;
     }
@@ -237,7 +237,7 @@ static int isUserValid(const char *user,
       return FALSE;
     }
 
-    
+
 
     /* If the password is bigger then 44 characters, then we have an additional password
      * set into the field, since the produced token by the yubikey is 44 characters long
@@ -276,7 +276,7 @@ static int isUserValid(const char *user,
 
         rpw = l;
         w = ap_getword(r->pool, &rpw, ':');
-        
+
 	/* The first 12 chars are the ID which must be available in this file
 	 * else the user might be a yubikey user, but possibly a user we don't
 	 * want.
@@ -313,8 +313,8 @@ static int isUserValid(const char *user,
 			    LOG_PREFIX "Could map ID %s to User: %s", w, user);
 	    userWasFound = TRUE;
 	    break;
-	  }   
-        }	
+	  }
+        }
     }
     ap_cfg_closefile(f);
 
@@ -322,7 +322,7 @@ static int isUserValid(const char *user,
 }
 
 /* This does some initial checking, like if we're running on a SSL line or not */
-static int checkInitial(request_rec *r) 
+static int checkInitial(request_rec *r)
 {
   yubiauth_dir_cfg *cfg = ap_get_module_config(r->per_dir_config, &authn_yubikey_module);
   ap_log_rerror(APLOG_MARK, APLOG_ERR|APLOG_DEBUG, 0, r,
@@ -337,8 +337,8 @@ static int checkInitial(request_rec *r)
       /* We explicitly want that to be overridable */
       //return HTTP_BAD_REQUEST;
       return HTTP_NOT_ACCEPTABLE;
-    } 
-      
+    }
+
     /* Tell the user/admin what's going on instead of just showing BAD_REQUEST */
     ap_rputs(DOCTYPE_HTML_4_0T, r);
     ap_set_content_type(r, "text/html;");
@@ -369,7 +369,7 @@ static authn_status authn_check_otp(request_rec *r, const char *user,
     if (!*user || !*password)
         return AUTH_DENIED;
 
-    /* Since the password field contains possibly a password and the OTP token, we 
+    /* Since the password field contains possibly a password and the OTP token, we
      * have to break that up here
      */
     passwordLength = (apr_size_t) strlen(password) - YUBIKEY_TOKEN_LENGTH;
@@ -426,7 +426,7 @@ static authn_status authn_check_otp(request_rec *r, const char *user,
     }
     ap_log_rerror(APLOG_MARK, APLOG_ERR|APLOG_DEBUG, 0, r, LOG_PREFIX "Fetched token (%s) ...", lookedUpToken);
 
-    /* password has to be set, if the pw content is NULL or empty, we have 
+    /* password has to be set, if the pw content is NULL or empty, we have
      * catched that earlier ...
      */
     if (lookedUpPassword != NULL && !strcmp(lookedUpPassword, &password[passwordLength])) {
@@ -459,7 +459,7 @@ static authn_status authn_check_otp(request_rec *r, const char *user,
         /* We could successfully authenticate the user */
         if (authenticationSuccessful) {
             /* Try to write the user into the db */
-            if (setUserInDb(userDbm, user, &password[passwordLength], r) 
+            if (setUserInDb(userDbm, user, &password[passwordLength], r)
 		!= APR_SUCCESS) {
                 /* Abort, we could not write the user into the db after
                  * authenticating him ...
@@ -483,7 +483,7 @@ static authn_status authn_check_otp(request_rec *r, const char *user,
     return AUTH_DENIED;
 }
 
-/* This provides a simple UI for accessing the key database 
+/* This provides a simple UI for accessing the key database
  * used to grant access to users owning a yubikey or not.
  *
  * This is primarily a web version of htaccess.
@@ -522,7 +522,7 @@ static int authn_yubikey_handler(request_rec *r)
 	        ap_rputs("No POST data available",r);
       }
       //We have the data now, now process it and save it into the db
-      
+
 
       ap_set_content_type(r, "text/plain;");
       ap_rprintf(r, "Postback content: %s", postbackContent);
@@ -539,7 +539,7 @@ static int authn_yubikey_handler(request_rec *r)
       status = ap_pcfg_openfile(&f, r->pool, cfg->userAuthDbFilename);
       if (status != APR_SUCCESS) {
         ap_log_rerror(APLOG_MARK, APLOG_ERR, status, r,
-                      LOG_PREFIX "Could not open YubiAuthUserDb file: %s", 
+                      LOG_PREFIX "Could not open YubiAuthUserDb file: %s",
 		      cfg->userAuthDbFilename);
         return HTTP_INTERNAL_SERVER_ERROR;
       }
@@ -586,7 +586,7 @@ static const authn_provider authn_yubikey_provider = {
 };
 
 static int init_mod_yk(apr_pool_t *pconf, apr_pool_t *plog, apr_pool_t *ptemp, server_rec *s)
-{ 
+{
     ap_log_error(APLOG_MARK, APLOG_INFO, 0, s,
                  LOG_PREFIX "Version [" MOD_AUTHN_YUBIKEY_VERSION "] initialized");
 
@@ -599,7 +599,7 @@ static void authn_yubikey_register_hooks(apr_pool_t *p)
 {
     //static const char *const aszSucc[] = { "mod_authz_user.c", NULL };
 
-    
+
     //ap_hook_auth_checker(authz_check_yubi_user, NULL, aszSucc, APR_HOOK_MIDDLE);
     /* No content handler for this one */
     //ap_hook_handler(authn_yubikey_handler, NULL, NULL, APR_HOOK_MIDDLE);
@@ -628,7 +628,7 @@ static const command_rec authn_yubikey_cmds[] = {
 		  "page (Default Off)"),
     AP_INIT_FLAG("AuthYubiKeyRequireSecure", ap_set_flag_slot,
                   (void*) APR_OFFSETOF(yubiauth_dir_cfg, requireSecure),
-                  ACCESS_CONF|RSRC_CONF, 
+                  ACCESS_CONF|RSRC_CONF,
 		 "Whether or not a secure site is required to pass authentication (Default On)"),
     {NULL}
 };
@@ -655,10 +655,10 @@ static void *merge_yubiauth_dir_cfg(apr_pool_t *pool, void *BASE, void *ADD)
   yubiauth_dir_cfg *dir = apr_pcalloc(pool, sizeof (yubiauth_dir_cfg));
 
   /* merge */
-  dir->timeoutSeconds = (add->timeoutSeconds == UNSET) ? base->timeoutSeconds : add->timeoutSeconds; 
+  dir->timeoutSeconds = (add->timeoutSeconds == UNSET) ? base->timeoutSeconds : add->timeoutSeconds;
   dir->requireSecure = (add->requireSecure == UNSET) ? base->requireSecure : add->requireSecure;
   dir->externalErrorPage = (add->externalErrorPage == UNSET) ? base->externalErrorPage : add->externalErrorPage;
-  
+
   dir->userAuthDbFilename = (add->userAuthDbFilename == NULL) ? base->userAuthDbFilename : add->userAuthDbFilename;
   dir->tmpAuthDbFilename = (add->tmpAuthDbFilename == NULL) ? base->tmpAuthDbFilename : add->tmpAuthDbFilename;
 

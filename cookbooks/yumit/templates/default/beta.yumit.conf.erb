@@ -2,6 +2,6 @@
   ServerName <%= @params[:server_name] %>
   <% @params[:server_aliases].to_a.each do |a| %>
   ServerAlias <%= a %>
-  <% end if @params[:server_aliases]%>  
+  <% end if @params[:server_aliases]%>
   RedirectPermanent / <%= @params[:redirect_to] %>
 </VirtualHost>

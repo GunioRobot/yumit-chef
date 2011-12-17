@@ -9,7 +9,7 @@ node[:users].each do |user|
   end
 
   home_dir = "/home/#{user[:username]}"
-  
+
   directory home_dir do
     owner user[:uid]
     group user[:gid]
@@ -30,7 +30,7 @@ node[:users].each do |user|
     group user[:gid]
     mode 0700
   end
-  
+
   for custom_file in user[:custom_files] || []
     template (custom_file[:path] || "#{home_dir}/#{custom_file[:name]}") do
       owner user[:uid]
@@ -40,13 +40,13 @@ node[:users].each do |user|
       source "custom.erb"
     end
   end
-  
+
   template "#{home_dir}/.ssh/authorized_keys" do
     owner user[:uid]
     group user[:gid]
     mode 0600
     source "authorized_keys.erb"
-    
+
     variables :user => user
   end if user[:authorized_keys]
 end

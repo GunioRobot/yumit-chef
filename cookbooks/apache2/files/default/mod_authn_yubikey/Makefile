@@ -23,12 +23,12 @@ LIBS=-lcurl
 #   the default target
 all: local-shared-build install
 
-#   install the shared object file into Apache 
+#   install the shared object file into Apache
 install: install-modules-yes
 
 #   cleanup
 clean:
-	-rm -f mod_authn_yubikey.o mod_authn_yubikey.lo mod_authn_yubikey.slo mod_authn_yubikey.la 
+	-rm -f mod_authn_yubikey.o mod_authn_yubikey.lo mod_authn_yubikey.slo mod_authn_yubikey.la
 
 #   simple test
 test: reload
